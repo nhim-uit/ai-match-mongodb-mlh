@@ -1,7 +1,6 @@
 import streamlit as st
 from pymongo import MongoClient
 import plotly.express as px
-import torch
 from transformers import BertTokenizer, BertModel
 import numpy as np
 from sklearn.decomposition import PCA
@@ -107,7 +106,7 @@ if st.button('Submit'):
             df = pd.DataFrame(reduce_embeddings, columns=['x', 'y'])
 
             df['name'] = names
-            fig = px.scatter(df, title='Embedding plot', x='x', y='y')
+            fig = px.scatter(df, title='Embedding plot', x='x', y='y', text=name)
             st.plotly_chart(fig)
 
     st.success('Your responses have been submitted successfully!')
