@@ -1,6 +1,7 @@
 import streamlit as st
 from pymongo import MongoClient
 
+# Connect to the database
 user = st.secrets['user']
 password = st.secrets['password']
 uri_url = st.secrets['uri']
@@ -26,7 +27,7 @@ st.divider()
 st.subheader('Fill the form to get matched with a techie')
 
 st.text_input('What is your name?')
-st.text_input('What are your programming language?')
+st.text_input('What are your programming languages?')
 st.text_input('What is your favourite of framework?')
 st.text_input('What is your favourite tech conference or blog post?')
 st.text_input('Have you contributed to any open source, name projects?')
