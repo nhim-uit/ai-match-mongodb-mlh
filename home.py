@@ -96,7 +96,7 @@ if st.button('Submit'):
 
             for match, similarity in similarities[:3]:
                 st.write(similarity)
-                st.write(match['responses']['name'])
+                st.write(match['responses'])
 
             st.subheader('Embedding graph display')
             embedding_list = [np.array(doc['embeddings']).flatten() for doc in all_documents]
