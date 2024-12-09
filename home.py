@@ -94,6 +94,7 @@ if st.button('Submit'):
 
             for match, similarity in similarities[:3]:
                 st.write(similarity)
+                st.write(match['responses']['name'])
 
 
     st.success('Your responses have been submitted successfully!')
