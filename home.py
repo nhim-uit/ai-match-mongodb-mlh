@@ -1,5 +1,8 @@
 import streamlit as st
 from pymongo import MongoClient
+import torch
+from transformers import BertTokenizer, BertModel
+import numpy as np
 
 # Connect to the database
 user = st.secrets['user']
@@ -11,6 +14,16 @@ uri = f'mongodb+srv://{user}:{password}@{uri_url}/?retryWrites=true&w=majority&a
 client = MongoClient(uri)
 db = client['techies-responses']
 collection = client['responses']
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertModel.from_pretrained('bert-base-uncased')
+
+def generate_embeddings(text):
+    inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True) # pt is for pytorch tensors
+    output = model(**inputs)
+    embedding = output.last_hidden_state.mean(dim=1).detach().numpy()
+    return embedding
+
 
 # Write the title of the app
 st.title('Matching app for techies')
