@@ -15,9 +15,11 @@ client = MongoClient(uri)
 db = client['techies-responses']
 collection = client['responses']
 
+# create embeddings by stating model and tokenizer which are from BERT in Hugging Face
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertModel.from_pretrained('bert-base-uncased')
 
+# function to generate embeddings
 def generate_embeddings(text):
     inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True) # pt is for pytorch tensors
     output = model(**inputs)
@@ -39,16 +41,38 @@ st.divider()
 # Add a subheader
 st.subheader('Fill the form to get matched with a techie')
 
-st.text_input('What is your name?')
-st.text_input('What are your programming languages?')
-st.text_input('What is your favourite of framework?')
-st.text_input('What is your favourite tech conference or blog post?')
-st.text_input('Have you contributed to any open source, name projects?')
-st.text_input('What is your favourite tech company?')
-st.text_input('What is your favourite code editor?')
+name = st.text_input('What is your name?')
+programming_languages = st.text_input('What are your programming languages?')
+framework = st.text_input('What is your favourite of framework?')
+conference_blog = st.text_input('What is your favourite tech conference or blog post?')
+open_source = st.text_input('Have you contributed to any open source, name projects?')
+company = st.text_input('What is your favourite tech company?')
+code_editor = st.text_input('What is your favourite code editor?')
 
 if st.button('Submit'):
-    # generate potential matches for my tech form
-    st.success('Yay you have been matched with a techie!')
+    # generate my document to then convert it into embeddings using my function
+    responses =  {
+        'name': name,
+        'programming_languages': programming_languages,
+        'framework': framework,
+        'conference_blog': conference_blog,
+        'open_source': open_source,
+        'company': company,
+        'code_editor': code_editor,
+    }
+
+    concatenated_responses = ' '.join(responses.values())
+
+    # pass on the responses to my embedded model
+    embeddings = generate_embeddings(concatenated_responses)
+    # st.write(embeddings)
+
+    document = {
+        'responses': responses,
+        'embeddings': embeddings.tolist(),
+    }
+
+    collection.insert_one(document)
+    st.success('Your responses have been submitted successfully!')
 else:
     st.warning('Opps! Something went wrong!!!')
