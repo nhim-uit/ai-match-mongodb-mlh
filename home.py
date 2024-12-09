@@ -107,7 +107,7 @@ if st.button('Submit'):
             df = pd.DataFrame(reduce_embeddings, columns=['x', 'y'])
 
             df['name'] = names
-            fig = px.scatter(df, title='Embedding plot', x='x', y='y', text=name)
+            fig = px.scatter(df, title='Embedding plot', x='x', y='y', text='name')	
             st.plotly_chart(fig)
 
     st.success('Your responses have been submitted successfully!')
