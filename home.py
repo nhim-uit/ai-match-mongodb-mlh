@@ -13,7 +13,7 @@ uri = f'mongodb+srv://{user}:{password}@{uri_url}/?retryWrites=true&w=majority&a
 
 client = MongoClient(uri)
 db = client['techies-responses']
-collection = client['responses']
+collection = client['techies-responses']['responses']
 
 # create embeddings by stating model and tokenizer which are from BERT in Hugging Face
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
