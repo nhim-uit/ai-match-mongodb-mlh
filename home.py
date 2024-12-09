@@ -1,6 +1,6 @@
 import streamlit as st
 from pymongo import MongoClient
-import plotty.express as px
+import plotly.express as px
 import torch
 from transformers import BertTokenizer, BertModel
 import numpy as np
