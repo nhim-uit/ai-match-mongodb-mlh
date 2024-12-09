@@ -88,12 +88,12 @@ if st.button('Submit'):
 
             similarities = sorted(similarities, key=lambda x: x[1], reverse=True)
 
-        # display the top 3 techies that match the interests
-        st.subheader('Here are the top 3 techies that match your interests:')
-        st.divider()
+            # display the top 3 techies that match the interests
+            st.subheader('Here are the top 3 techies that match your interests:')
+            st.divider()
 
-        for match, similarity in similarities[:3]:
-            st.write(similarity)
+            for match, similarity in similarities[:3]:
+                st.write(similarity)
 
 
     st.success('Your responses have been submitted successfully!')
