@@ -4,6 +4,7 @@ import plotly.express as px
 from transformers import BertTokenizer, BertModel
 import numpy as np
 from sklearn.decomposition import PCA
+import pandas as pd
 
 # Connect to the database
 user = st.secrets['user']
