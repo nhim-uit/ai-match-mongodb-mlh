@@ -2,4 +2,4 @@ pymongo
 transformers
 torch
 plotly
-sklearn
+scikit-learn
