@@ -1,4 +1,15 @@
 import streamlit as st
+from pymongo import MongoClient
+
+user = st.secrets['user']
+password = st.secrets['password']
+uri_url = st.secrets['uri']
+
+uri = f'mongodb+srv://{user}:{password}@{uri_url}/?retryWrites=true&w=majority&appName=Cluster1'
+
+client = MongoClient(uri)
+db = client['techies-responses']
+collection = client['responses']
 
 # Write the title of the app
 st.title('Matching app for techies')
